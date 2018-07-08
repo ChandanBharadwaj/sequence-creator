@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        .accordion, .accordion:after {
+            font-size: 15px;
+            color: #000
+        }
+
+        .accordion {
+            background-color:#F278A1;
+            cursor: pointer;
+            padding: 10px;
+            width: 300px;
+            border: none;
+            border-radius: 15px;
+            text-align: left;
+            outline: 0;
+            transition: .1s;
+            margin: 10px
+        }
+
+        .active {
+            background-color:#ccc; 
+        }
+
+        .accordion:after {
+            content: '\002B';
+            float: right;
+            margin-left: 5px;
+            padding-right: 10px
+        }
+
+        .active:after {
+            content: "\2212"
+        }
+
+        .panel {
+            padding: 0 18px;
+            background-color: #fff;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .1s ease-out
+        }
+
+        .list-type1 {
+            width: 250px;
+            margin: 0 30px
+        }
+
+        .list-type1 ol {
+            counter-reset: li;
+            list-style: none;
+            font-size: 15px;
+            padding: 0;
+            margin-bottom: 4em
+        }
+
+        .list-type1 ol ol {
+            margin: 0 0 0 2em
+        }
+
+        .list-type1 div {
+            position: relative;
+            display: block;
+            padding: .4em .4em .4em 2em;
+            margin: .5em 0;
+            background: #F278A1;
+            color: #000;
+            text-decoration: none;
+            -moz-border-radius: .3em;
+            -webkit-border-radius: .3em;
+            border-radius: 10px;
+            transition: all .2s ease-in-out
+        }
+
+        .list-type1 div:hover {
+            background: #d6d4d4;
+            text-decoration: none;
+            transform: scale(1.1)
+        }
+
+        .list-type1 div:before {
+            content: counter(li);
+            counter-increment: li;
+            position: absolute;
+            left: -1.3em;
+            top: 50%;
+            margin-top: -1.3em;
+            background: #F278A1;
+            height: 2em;
+            width: 2em;
+            line-height: 2em;
+            border: .3em solid #fff;
+            text-align: center;
+            font-weight: 700;
+            -moz-border-radius: 2em;
+            -webkit-border-radius: 2em;
+            border-radius: 2em;
+            color: #FFF
+        }
+    </style>
+</head>
+<body style="font-family: 'Raleway', sans-serif;">
+    <div style="font-size: xx-large;text-align: center">SampleService</div><div style="font-size: x-large; margin: 10px;"><b><u>WSDL</u> : </b></div><a style="margin: 10px;" href="/rsp/CustomerProfileService?wsdl" target="_blank">click here to see wsdl</a><div style="font-size: x-large; margin: 10px;"><b><u>Backends</u> : </b></div><div class="list-type1"><ol><li><div>Backend1-m1</div></li><li><div>Backend2-m2</div></li><li><div>Backend3-m3</div></li></ol></div><div style="font-size: x-large; margin: 10px;"><b><u>Operations</u> : </b></div><div class="accordion">getSampleService</div><div class="panel"><div style="font-size: large; margin: 10px;"><b><u>Operation Description</u> : </b></div><div style=" margin: 15px ;font-style: italic"></div><img style="margin: 10px;" src="./getSampleService.svg" alt="Sequence Diagram" height="100%" width="100%"></div><div class="accordion">getDummySampleService</div><div class="panel"><div style="font-size: large; margin: 10px;"><b><u>Operation Description</u> : </b></div><div style=" margin: 15px ;font-style: italic"></div><img style="margin: 10px;" src="./getDummySampleService.svg" alt="Sequence Diagram" height="100%" width="100%"></div><script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }</script></body></html>
