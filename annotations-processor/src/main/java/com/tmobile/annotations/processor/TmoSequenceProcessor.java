@@ -112,6 +112,9 @@ public class TmoSequenceProcessor extends AbstractProcessor {
 			}
 			
 			for (Element elem : roundEnv.getElementsAnnotatedWith(TmoOperation.class)) {
+				this.managerSet = new LinkedHashSet<String>();
+				this.daoSet =new LinkedHashSet<String>();
+				this.backendSet = new LinkedHashSet<String>();
 				processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE,String.valueOf(++this.operations_count));
 				long startTime=System.currentTimeMillis();
 				TmoOperation tmoOp = elem.getAnnotation(TmoOperation.class);
@@ -150,7 +153,7 @@ public class TmoSequenceProcessor extends AbstractProcessor {
 											sb.append("hnote "+this.CONDITION_DIRECTION+" "+tmoOperationFlow.component()+" "+this.NOTE_BG_COLOR+": "+tmoComponentFlow.componentCondition()+"\n");
 										}
 										String inner =getComponetScript(tmoComponentFlow).toString();
-										System.out.println("getComponetScript"+ inner);
+										//System.out.println("getComponetScript"+ inner);
 										this.sbInnerComp = new StringBuffer();
 										sb.append(inner);
 										sb.append(tmoComponentFlow.component()+" --> "+tmoOperationFlow.component()+": "+((StringUtils.isNotEmpty(tmoComponentFlow.componentOutput()))?tmoComponentFlow.componentOutput():tmoComponentFlow.componentOperation())+"\n");
@@ -252,7 +255,7 @@ public class TmoSequenceProcessor extends AbstractProcessor {
 				}
 			}
 		}
-		System.out.println("sbInnerComp : "+sbComp);
+		//System.out.println("sbInnerComp : "+sbComp);
 		sbInnerComp.append(sbComp);
 		return sbInnerComp.toString();
 	}
@@ -341,7 +344,7 @@ public class TmoSequenceProcessor extends AbstractProcessor {
         	
 			// backends
 			writer.write("<div style=\"font-size: x-large; margin: 10px;\"><b><u>Backends</u> : </b></div><div class=\"list-type1\"><ol>");
-			System.out.println(tmoDaoHtmlList);
+			//System.out.println(tmoDaoHtmlList);
 			for(String backend :tmoDaoHtmlList) {
 				writer.write(backend);
 			}
@@ -349,7 +352,7 @@ public class TmoSequenceProcessor extends AbstractProcessor {
 			
 			// operations
 			writer.write("<div style=\"font-size: x-large; margin: 10px;\"><b><u>Operations</u> : </b></div>");
-			System.out.println(tmoOperationHtmlList);
+			//System.out.println(tmoOperationHtmlList);
 			for (String op : tmoOperationHtmlList) {
 				writer.write(op);
 			}
@@ -365,6 +368,7 @@ public class TmoSequenceProcessor extends AbstractProcessor {
 	private Set<String> managerSet = new LinkedHashSet<String>();
 	private Set<String> daoSet = new LinkedHashSet<String>();
 	private Set<String> backendSet = new LinkedHashSet<String>();
+	
 	private String createParticipants(TmoOperationFlow[] opFlowList) {
 		StringBuffer managerParticipants=new StringBuffer();
 		StringBuffer daoParticipants=new StringBuffer();
